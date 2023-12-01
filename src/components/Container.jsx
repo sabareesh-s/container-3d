@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
-import { GUI } from 'dat.gui';
+import { OrbitControls, useGLTF } from '@react-three/drei';
+// import { GUI } from 'dat.gui';
 
 export function Model(props) {
   const container = useGLTF('./ContainerRev5.gltf');
@@ -10,24 +10,24 @@ export function Model(props) {
 }
 
 function Container() {
-  const orbitControls = useRef();
-  const controlsFolder = useRef();
-  const gui = new GUI();
+  // const orbitControls = useRef();
+  // const controlsFolder = useRef();
+  // const gui = new GUI();
 
-  useEffect(() => {
-    controlsFolder.current = gui.addFolder('Controls');
+  // useEffect(() => {
+  //   controlsFolder.current = gui.addFolder('Controls');
 
-    return () => {
-      gui.destroy();
-    };
-  }, []);
+  //   return () => {
+  //     gui.destroy();
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (orbitControls.current && controlsFolder.current) {
-      // Use the current value of orbitControls and controlsFolder
-      controlsFolder.current.add(orbitControls.current, 'enabled').name('Enable Rotation');
-    }
-  }, [orbitControls.current, controlsFolder.current]);
+  // useEffect(() => {
+  //   if (orbitControls.current && controlsFolder.current) {
+  //     // Use the current value of orbitControls and controlsFolder
+  //     controlsFolder.current.add(orbitControls.current, 'enabled').name('Enable Rotation');
+  //   }
+  // }, [orbitControls.current, controlsFolder.current]);
 
   return (
     <Canvas
@@ -42,7 +42,7 @@ function Container() {
         <directionalLight position={[4, 5, 0]} intensity={0.8} />
         <Model />
         <OrbitControls
-          ref={(controls) => (orbitControls.current = controls)}
+          // ref={(controls) => (orbitControls.current = controls)}
           enablePan={true}
           enableZoom={true}
           enableRotate={true}
