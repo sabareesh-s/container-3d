@@ -228,11 +228,16 @@ function Container() {
 
   return (
     <>
-     <div style={{
+      <div style={{
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
       margin: "7px",
+      position: "absolute",
+      zIndex: "999",
+      backgroundColor: "white",
+      padding: "5px",
+      borderRadius: "4px"
      }}>
         <label style={{
           display: "flex",
@@ -247,17 +252,18 @@ function Container() {
           width: "170px",
           justifyContent: "space-between",
         }}>
-          Show Door
-          <input type="checkbox" checked={showDoor} onChange={() => setShowDoor(!showDoor)} />
+          Show Window 2
+          <input type="checkbox" checked={showWindow2} onChange={() => setShowWindow2(!showWindow2)} />
         </label>
         <label style={{
           display: "flex",
           width: "170px",
           justifyContent: "space-between",
         }}>
-          Show Window 2
-          <input type="checkbox" checked={showWindow2} onChange={() => setShowWindow2(!showWindow2)} />
+          Show Door
+          <input type="checkbox" checked={showDoor} onChange={() => setShowDoor(!showDoor)} />
         </label>
+       
       </div>
       <Canvas
         style={{ height: '100vh', width: '100vw' }}
@@ -265,7 +271,7 @@ function Container() {
       >
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <spotLight intensity={0.9} angle={0.1} penumbra={1} position={[0, 0, 2]} castShadow />
+          {/* <spotLight intensity={1} angle={0.5} penumbra={2} position={[1.3, 1, 5]} castShadow /> */}
           <directionalLight position={[0, 0, 2]} intensity={0.8} />
           <directionalLight position={[0, 3, 0]} intensity={0.8} />
           <directionalLight position={[4, 5, 0]} intensity={0.8} />
