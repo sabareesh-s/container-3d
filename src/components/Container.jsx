@@ -273,8 +273,11 @@ function Container() {
           <ambientLight intensity={0.5} />
           {/* <spotLight intensity={1} angle={0.5} penumbra={2} position={[1.3, 1, 5]} castShadow /> */}
           <directionalLight position={[0, 0, 2]} intensity={0.8} />
-          <directionalLight position={[0, 3, 0]} intensity={0.8} />
+          <directionalLight position={[0, 3, 1]} intensity={0.8} />
           <directionalLight position={[4, 5, 0]} intensity={0.8} />
+          <directionalLight position={[-3, 0, 4]} intensity={0.8} />
+          <directionalLight position={[-2, 3, -1]} intensity={0.8} />
+          <directionalLight position={[3, 9, 0]} intensity={0.8} />
           <Model showWindow1 = {showWindow1} showWindow2 = {showWindow2} showDoor = {showDoor}/>
           <OrbitControls
             // ref={(controls) => (orbitControls.current = controls)}
