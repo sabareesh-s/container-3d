@@ -167,7 +167,7 @@ function Model(props) {
         <mesh geometry={nodes.container_part_104.geometry} material={materials['19 - Default']} position={[-0.004, -1.296, 0.193]} />
         <mesh geometry={nodes.container_part_105.geometry} material={materials['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes.container_part_106.geometry} material={materials['19 - Default']} position={[-0.03, -1.296, 0.007]} />
-        <mesh geometry={nodes.text_8.geometry} material={materials['19 - Default']} position={[-0.03, -1.296, 0.007]} />
+        <mesh geometry={nodes.text_8.geometry} material={materials} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes.text_1.geometry} material={materials['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes.door_part_9.geometry} material={materials['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes.door_part_10.geometry} material={materials['19 - Default']} position={[-0.03, -1.296, 0.007]} />
@@ -276,8 +276,8 @@ function Container() {
             enableZoom={true}
             enableRotate={true}
             zoomSpeed={0.5}
-            // autoRotate
-            // autoRotateSpeed={1}
+            autoRotate
+            autoRotateSpeed={1}
           />
         </Suspense>
       </Canvas>
