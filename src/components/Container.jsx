@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { Color, MeshStandardMaterial } from 'three';
 // import { GUI } from 'dat.gui';
 
 function Model(props) {
   const { nodes: nodes5, materials: materials5 } = useGLTF('/ContainerRev5.gltf');
   const { nodes: nodes6, materials: materials6 } = useGLTF('/ContainerRev6.gltf');
   
-
-  console.log(props)
   // const defaultMaterial = new MeshStandardMaterial({ color: 0x04030 });
   return (
     <group {...props} dispose={null}>
