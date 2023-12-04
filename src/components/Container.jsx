@@ -4,12 +4,6 @@ import { Suspense } from 'react';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 // import { GUI } from 'dat.gui';
 
-// export function Model(props) {
-//   const container = useGLTF('./ContainerRev5.gltf');
-//   console.log("container",container)
-//   return <primitive object={container.scene} />;
-// }
-
 function Model(props) {
   const { nodes: nodes5, materials: materials5 } = useGLTF('/ContainerRev5.gltf');
   const { nodes: nodes6, materials: materials6 } = useGLTF('/ContainerRev6.gltf');
@@ -19,7 +13,7 @@ function Model(props) {
 
   return (
     <group {...props} dispose={null}>
-      <group position={[0.03, 1.294, 0]}>
+      <group position={[0, 0, 0]}>
         {/* container6 */}
        
 
@@ -225,28 +219,15 @@ function Model(props) {
 }
 
 function Container() {
-  // const orbitControls = useRef();
-  // const controlsFolder = useRef();
-  // const gui = new GUI();
-
-  // useEffect(() => {
-  //   controlsFolder.current = gui.addFolder('Controls');
-
-  //   return () => {
-  //     gui.destroy();
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (orbitControls.current && controlsFolder.current) {
-  //     // Use the current value of orbitControls and controlsFolder
-  //     controlsFolder.current.add(orbitControls.current, 'enabled').name('Enable Rotation');
-  //   }
-  // }, [orbitControls.current, controlsFolder.current]);
 
   const [showWindow1, setShowWindow1] = useState(true);
   const [showDoor, setShowDoor] = useState(true);
   const [showWindow2, setShowWindow2] = useState(true);
+  const [enableRotation, setEnableRotation] = useState(true);
+  // const [draggable, setDraggable] = useState(true)
+  // const [enableLoadingScreen, setEnableLoadingScreen] = useState(true);
+
+  console.log(enableRotation, "enable rotation")
 
   return (
     <>
@@ -279,43 +260,56 @@ function Container() {
           Window 2
           <input type="checkbox" checked={showWindow2} onChange={() => setShowWindow2(!showWindow2)} />
         </label>
-        {/* <label style={{
+        <label style={{
           display: "flex",
           width: "180px",
           justifyContent: "space-between",
         }}>
-          Show Door
-          <input type="checkbox" checked={showDoor} onChange={() => setShowDoor(!showDoor)} />
-        </label> */}
+          Enable rotation
+          <input type="checkbox" checked={enableRotation} onChange={() => setEnableRotation(!enableRotation)} />
+        </label>
        
       </div>
-      <Canvas
-        style={{ height: '100vh', width: '100vw' }}
-        camera={{ position: [10, 2, 0], fov: 50, near: 0.7, far: 10000 }}
-      >
-        <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
-          {/* <spotLight intensity={1} angle={0.5} penumbra={2} position={[1.3, 1, 5]} castShadow /> */}
-          <directionalLight position={[0, 0, 2]} intensity={0.8} />
-          <directionalLight position={[0, 3, 1]} intensity={0.8} />
-          <directionalLight position={[4, 5, 0]} intensity={0.8} />
-          <directionalLight position={[-3, 0, 4]} intensity={0.8} />
-          <directionalLight position={[-2, 3, 1]} intensity={0.8} />
-          {/* <directionalLight position={[3, 9, 0]} intensity={0.8} /> */}
-          <Model showWindow1 = {showWindow1} showWindow2 = {showWindow2} showDoor = {showDoor}/>
-          <OrbitControls
-            // ref={(controls) => (orbitControls.current = controls)}
-            enablePan={true}
-            enableZoom={true}
-            enableRotate={true}
-            zoomSpeed={0.5}
-            autoRotate
-            autoRotateSpeed={1}
-          />
-        </Suspense>
-      </Canvas>
+      <Suspense fallback={<div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: "999"
+        }}> 
+          <div class="loader">Loading...</div>
+
+                </div>}>
+                <Canvas
+                  style={{ height: '100vh', width: '100vw' }}
+                  camera={{ position: [10, 2, 0], fov: 50, near: 0.7, far: 10000 }}
+                >
+                
+                <ambientLight intensity={0.5} />
+                {/* <spotLight intensity={1} angle={0.5} penumbra={2} position={[1.3, 1, 5]} castShadow /> */}
+                <directionalLight position={[0, 0, 2]} intensity={0.8} />
+                <directionalLight position={[0, 3, 1]} intensity={0.8} />
+                <directionalLight position={[4, 5, 0]} intensity={0.8} />
+                <directionalLight position={[-3, 0, 4]} intensity={0.8} />
+                <directionalLight position={[-2, 3, 1]} intensity={0.8} />
+                {/* <directionalLight position={[3, 9, 0]} intensity={0.8} /> */}
+                <Model showWindow1 = {showWindow1} showWindow2 = {showWindow2} showDoor = {showDoor}/>
+                <OrbitControls
+                  // ref={(controls) => (orbitControls.current = controls)}
+                  key={enableRotation}
+                  enablePan={true}
+                  enableZoom={true}
+                  enableRotate
+                  zoomSpeed={0.5}
+                  autoRotate={enableRotation}
+                  autoRotateSpeed={1}
+                />
+            </Canvas>
+      </Suspense>
     </>
   );
 }
+
 
 export default Container;
