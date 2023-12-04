@@ -309,7 +309,7 @@ function Container() {
             enableZoom={true}
             enableRotate={true}
             zoomSpeed={0.5}
-            // autoRotate
+            autoRotate
             autoRotateSpeed={1}
           />
         </Suspense>
