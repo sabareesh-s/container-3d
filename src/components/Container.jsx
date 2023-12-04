@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { MeshStandardMaterial } from 'three';
+import { Color, MeshStandardMaterial } from 'three';
 // import { GUI } from 'dat.gui';
 
 function Model(props) {
@@ -16,7 +16,6 @@ function Model(props) {
     <group {...props} dispose={null}>
       <group position={[0, 0, 0]}>
         {/* container6 */}
-       
 
         {props.showWindow2 === false &&  (
           <mesh geometry={nodes6.WallShape002.geometry} material={materials6['19 - Default']} position={[4.51, -1.128, -3.029]} rotation={[-Math.PI, -1.57, 0]} scale={[1, -1, 1]} />
@@ -292,10 +291,12 @@ function Container() {
                 {/* <spotLight intensity={1} angle={0.5} penumbra={2} position={[1.3, 1, 5]} castShadow /> */}
                 <directionalLight position={[0, 0, 2]} intensity={0.8} />
                 <directionalLight position={[0, 3, 1]} intensity={0.8} />
-                <directionalLight position={[4, 5, 0]} intensity={0.8} />
+                <directionalLight position={[4, 5, 0]} intensity={0.5} />
                 <directionalLight position={[-3, 0, 4]} intensity={0.8} />
                 <directionalLight position={[-2, 3, 1]} intensity={0.8} />
-                {/* <directionalLight position={[3, 9, 0]} intensity={0.8} /> */}
+                <directionalLight position={[3, 7, 0]} intensity={0.8} />
+                <directionalLight position={[4, 0, -7]} intensity={0.8} />
+
                 <Model showWindow1 = {showWindow1} showWindow2 = {showWindow2} showDoor = {showDoor}/>
                 <OrbitControls
                   // ref={(controls) => (orbitControls.current = controls)}
