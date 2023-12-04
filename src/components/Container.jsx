@@ -233,16 +233,17 @@ function Container() {
   return (
     <>
       <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      margin: "7px",
-      position: "absolute",
-      zIndex: "999",
-      backgroundColor: "white",
-      padding: "5px",
-      borderRadius: "4px"
-     }}>
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        margin: "7px",
+        position: "absolute",
+        zIndex: "999",
+        backgroundColor: "white",
+        padding: "5px",
+        borderRadius: "6px",
+        fontSize: "0.9rem",
+      }}>
         <label style={{
           display: "flex",
           width: "180px",
