@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { OrbitControls, useGLTF } from '@react-three/drei';
+import { MeshStandardMaterial } from 'three';
 // import { GUI } from 'dat.gui';
 
 function Model(props) {
@@ -10,7 +11,7 @@ function Model(props) {
   
 
   console.log(props)
-
+  // const defaultMaterial = new MeshStandardMaterial({ color: 0x04030 });
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, 0]}>
@@ -178,7 +179,7 @@ function Model(props) {
         <mesh geometry={nodes5.container_part_105.geometry} material={materials5['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes5.container_part_106.geometry} material={materials5['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes5.text_8.geometry} material={materials5} position={[-0.03, -1.296, 0.007]} />
-        <mesh geometry={nodes5.text_1.geometry} material={materials5['19 - Default']} position={[-0.03, -1.296, 0.007]} />
+        <mesh geometry={nodes5.text_1.geometry} material={materials5['Glass']} position={[-0.056, -1.296, 0.013]} />
         <mesh geometry={nodes5.door_part_9.geometry} material={materials5['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes5.door_part_10.geometry} material={materials5['19 - Default']} position={[-0.03, -1.296, 0.007]} />
         <mesh geometry={nodes5.door_part_11.geometry} material={materials5['19 - Default']} position={[-0.03, -1.296, 0.007]} />
