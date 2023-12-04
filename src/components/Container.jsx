@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { BufferGeometryUtils } from 'three';
 // import { GUI } from 'dat.gui';
 
 // export function Model(props) {
