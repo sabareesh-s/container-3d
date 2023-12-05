@@ -207,13 +207,13 @@ function Model(props) {
           <mesh castShadow geometry={nodes5.fixation_31.geometry} material={materials5.Metal} position={[-0.03, -1.296, 0.007]} />
           {props.showWindow1 && props.showDoor && (
             <>
-              <mesh geometry={nodes5.container_part_76.geometry} material={materials5['19 - Default']} position={[-0.004, -1.296, 0.22]} />
-              <mesh geometry={nodes5.container_part_77.geometry} material={materials5['19 - Default']} position={[-0.004, -1.296, -0.086]} /> 
-              <mesh geometry={nodes5.WallShape.geometry} material={materials5['19 - Default']} position={[1.162, -1.128, 3.423]} />
+              <mesh castShadow geometry={nodes5.container_part_76.geometry} material={materials5['19 - Default']} position={[-0.004, -1.296, 0.22]} />
+              <mesh castShadow geometry={nodes5.container_part_77.geometry} material={materials5['19 - Default']} position={[-0.004, -1.296, -0.086]} /> 
+              <mesh castShadow geometry={nodes5.WallShape.geometry} material={materials5['19 - Default']} position={[1.162, -1.128, 3.423]} />
             </>
           )}
-          <mesh geometry={nodes5.WallShape003.geometry} material={materials5['19 - Default']} position={[-1.222, -1.128, -3.474]} rotation={[-Math.PI, 0, Math.PI]} />
-          <mesh geometry={nodes5.WallShape002.geometry} material={materials5['19 - Default']} position={[4.51, -1.128, -3.029]} rotation={[-Math.PI, -1.57, 0]} scale={[1, -1, 1]} />
+          <mesh castShadow geometry={nodes5.WallShape003.geometry} material={materials5['19 - Default']} position={[-1.222, -1.128, -3.474]} rotation={[-Math.PI, 0, Math.PI]} />
+          <mesh castShadow geometry={nodes5.WallShape002.geometry} material={materials5['19 - Default']} position={[4.51, -1.128, -3.029]} rotation={[-Math.PI, -1.57, 0]} scale={[1, -1, 1]} />
         </group>
       </group>
     </>
@@ -223,7 +223,7 @@ function Model(props) {
 const Floor = () => {
   const texture = useLoader(TextureLoader, '/concrete_texturetile.png');
   texture.wrapS = texture.wrapT = RepeatWrapping;
-  texture.repeat.set(300, 300); 
+  texture.repeat.set(100, 100); 
 
   return (
     <Plane
@@ -232,8 +232,7 @@ const Floor = () => {
       position={[0, -1.3, 0]}
       receiveShadow
     >
-      <shadowMaterial attach="material" transparent opacity={0.5} />
-      <meshStandardMaterial attach="material" map={texture} receiveShadow />
+      <meshStandardMaterial attach="material" map={texture} />
    </Plane>
   );
 };
@@ -243,11 +242,19 @@ function Container() {
   const [showWindow1, setShowWindow1] = useState(true);
   const [showDoor, setShowDoor] = useState(true);
   const [showWindow2, setShowWindow2] = useState(true);
-  const [enableRotation, setEnableRotation] = useState(false);
+  const [enableRotation, setEnableRotation] = useState(true);
+  const [intensity, setIntensity] = useState(0.8)
   // const [draggable, setDraggable] = useState(true)
   // const [enableLoadingScreen, setEnableLoadingScreen] = useState(true);
 
-  console.log(enableRotation, "enable rotation")
+  const [lightPosition, setLightPosition] = useState([3, 3, -3]);
+
+  const handleLightPositionChange = (axis, value) => {
+    const newPosition = [...lightPosition];
+    newPosition[axis] = value;
+    setLightPosition(newPosition);
+  };
+
 
   return (
     <>
@@ -265,7 +272,7 @@ function Container() {
       }}>
         <label style={{
           display: "flex",
-          width: "180px",
+          width: "190px",
           justifyContent: "space-between",
         }}>
           Window 1 and Door
@@ -275,7 +282,7 @@ function Container() {
         </label>
         <label style={{
           display: "flex",
-          width: "180px",
+          width: "190px",
           justifyContent: "space-between",
         }}>
           Window 2
@@ -283,12 +290,62 @@ function Container() {
         </label>
         <label style={{
           display: "flex",
-          width: "180px",
+          width: "190px",
           justifyContent: "space-between",
         }}>
           Enable rotation
           <input type="checkbox" checked={enableRotation} onChange={() => setEnableRotation(!enableRotation)} />
         </label>
+
+
+        <div style={{
+          display: "flex",
+          width: "190px",
+          justifyContent: "space-between",
+        }}>
+          <label>X-axis</label>
+          <input
+            type="range"
+            min="-12"
+            max="12"
+            step="0.1"
+            value={lightPosition[0]}
+            onChange={(e) => handleLightPositionChange(0, parseFloat(e.target.value))}
+          />
+          
+        </div>
+        <div style={{
+          display: "flex",
+          width: "190px",
+          justifyContent: "space-between",
+        }}>
+          <label>Y-axis</label>
+          <input
+            type="range"
+            min="0"
+            max="12"
+            step="0.1"
+            value={lightPosition[1]}
+            onChange={(e) => handleLightPositionChange(1, parseFloat(e.target.value))}
+          />
+        </div>
+        <div style={{
+          display: "flex",
+          width: "190px",
+          justifyContent: "space-between",
+        }}>
+          <label>Z-axis</label>
+          <input
+            type="range"
+            min="-12"
+            max="12"
+            step="0.1"
+            value={lightPosition[2]}
+            onChange={(e) => handleLightPositionChange(2, parseFloat(e.target.value))}
+          />
+        </div>
+
+        <span style={{marginLeft:"auto"}}>[{lightPosition[0].toFixed(0)},{lightPosition[1].toFixed(0)},{lightPosition[2].toFixed(0)}]</span>
        
       </div>
       <Suspense fallback={<div
@@ -306,17 +363,14 @@ function Container() {
                   style={{ height: '100vh', width: '100vw' }}
                   camera={{ position: [10, 2, 0], fov: 50, near: 0.7, far: 10000 }}
                   shadowMap
+                  shadows
                 >
                 
-                <ambientLight intensity={0.5} />
-                {/* <spotLight intensity={1} angle={0.5} penumbra={2} position={[1.3, 1, 5]} castShadow /> */}
-                <directionalLight castShadow position={[0, 0, 2]} intensity={0.8} />
-                <directionalLight castShadow position={[0, 3, 1]} intensity={0.8} />
-                <directionalLight position={[4, 5, 0]} intensity={0.5} />
-                {/* <directionalLight position={[-3, 0, 4]} intensity={0.8} />
-                <directionalLight position={[-2, 3, 1]} intensity={0.8} /> */}
-                <directionalLight position={[3, 7, 0]} intensity={0.8} />
-                {/* <directionalLight castShadow position={[4, 0, -7]} intensity={0.8} /> */}
+                <ambientLight intensity={0.4} />
+
+                <directionalLight castShadow position={lightPosition} intensity={0.8} />
+                <directionalLight position={[-1, 4, -2]} intensity={0.4} />
+
 
                 <Model showWindow1 = {showWindow1} showWindow2 = {showWindow2} showDoor = {showDoor}/>
                 <Floor />
