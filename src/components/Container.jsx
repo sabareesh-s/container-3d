@@ -243,9 +243,6 @@ function Container() {
   const [showDoor, setShowDoor] = useState(true);
   const [showWindow2, setShowWindow2] = useState(true);
   const [enableRotation, setEnableRotation] = useState(true);
-  const [intensity, setIntensity] = useState(0.8)
-  // const [draggable, setDraggable] = useState(true)
-  // const [enableLoadingScreen, setEnableLoadingScreen] = useState(true);
 
   const [lightPosition, setLightPosition] = useState([3, 3, -3]);
 
