@@ -365,8 +365,9 @@ function Container() {
                 
                 <ambientLight intensity={0.4} />
 
-                <directionalLight castShadow position={lightPosition} intensity={0.8} />
-                <directionalLight position={[-1, 4, -2]} intensity={0.4} />
+                <directionalLight visible castShadow position={lightPosition} intensity={0.9} />
+                <directionalLight position={[-1, 4, -2]} intensity={0.3} />
+                <directionalLight position={[-6, 12, 12]} intensity={0.3} />
 
 
                 <Model showWindow1 = {showWindow1} showWindow2 = {showWindow2} showDoor = {showDoor}/>
@@ -379,7 +380,9 @@ function Container() {
                   autoRotate={enableRotation}
                   autoRotateSpeed={1}
                   minPolarAngle={0}  
-                  maxPolarAngle={Math.PI / 2} 
+                  maxPolarAngle={Math.PI / 2}
+                  minDistance={5}
+                  maxDistance={20} 
                 />
             </Canvas>
       </Suspense>
