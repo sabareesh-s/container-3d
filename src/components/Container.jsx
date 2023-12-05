@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import { Html, OrbitControls, Plane, Shadow, useGLTF } from '@react-three/drei'; 
+import { OrbitControls, Plane, useGLTF } from '@react-three/drei'; 
 import { useLoader } from '@react-three/fiber';
 import { RepeatWrapping, TextureLoader } from 'three';
 
