@@ -258,9 +258,27 @@ function Container() {
         } else if (attribute === 'enableRotation') {
           setEnableRotation(true);
         }
-        // You can add more conditions based on your requirements
       });
     }
+
+    const handleMessage = (event) => {
+      if (event.origin === 'http://redfysh.com/content/TGLContainers/index.html') {
+        if (event.data === 'toggleWindow1andDoor') {
+          setShowWindow1((prev) => !prev);
+          setShowDoor((prev) => !prev);
+        } else if (event.data === 'toggleWindow2') {
+          setShowWindow2((prev) => !prev);
+        } else if (event.data === 'enableRotation') {
+          setEnableRotation((prev) => !prev);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
   }, []);
 
   const [lightPosition, setLightPosition] = useState([3, 3, -3]);
