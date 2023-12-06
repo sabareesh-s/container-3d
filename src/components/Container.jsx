@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { OrbitControls, Plane, useGLTF } from '@react-three/drei'; 
@@ -10,8 +10,7 @@ import { RepeatWrapping, TextureLoader } from 'three';
 function Model(props) {
   const { nodes: nodes5, materials: materials5 } = useGLTF('/ContainerRev5.gltf');
   const { nodes: nodes6, materials: materials6 } = useGLTF('/ContainerRev6.gltf');
-  
-  // const defaultMaterial = new MeshStandardMaterial({ color: 0x04030 });
+
   return (
     <>
       <group {...props} dispose={null} castShadow>
@@ -239,10 +238,30 @@ const Floor = () => {
 
 function Container() {
 
-  const [showWindow1, setShowWindow1] = useState(true);
-  const [showDoor, setShowDoor] = useState(true);
-  const [showWindow2, setShowWindow2] = useState(true);
-  const [enableRotation, setEnableRotation] = useState(true);
+  const [showWindow1, setShowWindow1] = useState(false);
+  const [showDoor, setShowDoor] = useState(false);
+  const [showWindow2, setShowWindow2] = useState(false);
+  const [enableRotation, setEnableRotation] = useState(false);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const attributeValue = urlParams.get('attribute');
+    if (attributeValue) {
+      const attributeArray = attributeValue.split(',');
+
+      attributeArray.forEach(attribute => {
+        if (attribute === 'showWindow1andDoor') {
+          setShowWindow1(true);
+          setShowDoor(true);
+        } else if (attribute === 'showWindow2') {
+          setShowWindow2(true);
+        } else if (attribute === 'enableRotation') {
+          setEnableRotation(true);
+        }
+        // You can add more conditions based on your requirements
+      });
+    }
+  }, []);
 
   const [lightPosition, setLightPosition] = useState([3, 3, -3]);
 
