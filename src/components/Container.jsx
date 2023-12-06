@@ -263,15 +263,13 @@ function Container() {
 
     const handleMessage = (event) => {
       console.log("event", event)
-      if (event.origin === 'http://redfysh.com/content/TGLContainers/index.html') {
-        if (event.data === 'toggleWindow1andDoor') {
-          setShowWindow1((prev) => !prev);
-          setShowDoor((prev) => !prev);
-        } else if (event.data === 'toggleWindow2') {
-          setShowWindow2((prev) => !prev);
-        } else if (event.data === 'enableRotation') {
-          setEnableRotation((prev) => !prev);
-        }
+      if (event.data === 'toggleWindow1andDoor') {
+        setShowWindow1((prev) => !prev);
+        setShowDoor((prev) => !prev);
+      } else if (event.data === 'toggleWindow2') {
+        setShowWindow2((prev) => !prev);
+      } else if (event.data === 'enableRotation') {
+        setEnableRotation((prev) => !prev);
       }
     };
 
