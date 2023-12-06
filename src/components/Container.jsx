@@ -262,6 +262,7 @@ function Container() {
     }
 
     const handleMessage = (event) => {
+      console.log("event", event)
       if (event.origin === 'http://redfysh.com/content/TGLContainers/index.html') {
         if (event.data === 'toggleWindow1andDoor') {
           setShowWindow1((prev) => !prev);
